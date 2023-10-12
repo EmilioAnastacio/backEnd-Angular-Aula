@@ -14,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/pessoa")
-@CrossOrigin(	origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class PessoaController {
 	
 	@Autowired
@@ -30,7 +30,7 @@ public class PessoaController {
 		}
 	}
 	
-	@PostMapping
+	@PostMapping(value = "/cadastrar")
 	private ResponseEntity<PessoaDTO> save(@RequestBody PessoaDTO pessoaDTO){
 		try {		
 			PessoaDTO pessoaSalva = pessoaService.save(pessoaDTO);
@@ -40,8 +40,8 @@ public class PessoaController {
 		}
 	}
 
-	@PutMapping(value = "/editar")
-	public ResponseEntity<PessoaDTO> editar(@RequestParam("id") final Long id, @RequestBody final PessoaDTO pessoaDTO){
+	@PutMapping(value = "/editar/{id}")
+	public ResponseEntity<PessoaDTO> editar(@PathVariable("id") final Long id, @RequestBody final PessoaDTO pessoaDTO){
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(pessoaService.editar(id,pessoaDTO));
 
@@ -50,8 +50,8 @@ public class PessoaController {
 		}
 	}
 
-	@DeleteMapping(value = "/deletar")
-	public ResponseEntity<String> deletar(@RequestParam("id") final Long id){
+	@DeleteMapping(value = "/deletar/{id}")
+	public ResponseEntity<String> deletar(@PathVariable("id") final Long id){
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(pessoaService.deletar(id));
 

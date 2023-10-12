@@ -51,7 +51,9 @@ public class LivroService {
         livro.setTitulo(livroNovoDTO.getTitulo());
         livro.setAutor(livroNovoDTO.getAutor());
 
-        return livroNovoDTO = toLivroDTO(livro);
+        Livro livroSalvo = repository.save(livro);
+
+        return livroNovoDTO = toLivroDTO(livroSalvo);
     }
 
     public String deletar(Long id){

@@ -3,6 +3,7 @@ package app.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.entity.Carro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +51,9 @@ public class PessoaService {
 		pessoa.setNome(pessoaNovoDTO.getNome());
 		pessoa.setIdade(pessoaNovoDTO.getIdade());
 
-		return pessoaNovoDTO = toPessoaDTO(pessoa);
+		Pessoa pessoaSalvo = pessoaRepository.save(pessoa);
+
+		return pessoaNovoDTO = toPessoaDTO(pessoaSalvo);
 	}
 
 	public String deletar(Long id){

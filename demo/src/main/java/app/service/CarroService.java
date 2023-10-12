@@ -3,8 +3,8 @@ package app.service;
 import app.dto.CarroDTO;
 import app.entity.Carro;
 import app.repository.CarroRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,9 @@ public class CarroService {
         carro.setMarca(carroNovoDTO.getMarca());
         carro.setModelo(carroNovoDTO.getMarca());
 
-        return carroNovoDTO = toCarroDTO(carro);
+        Carro carroSalvo = repository.save(carro);
+
+        return carroNovoDTO = toCarroDTO(carroSalvo);
     }
 
     public String deletar(Long id){
